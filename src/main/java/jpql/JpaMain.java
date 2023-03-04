@@ -27,7 +27,7 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            List<Member> resultList = em.createQuery("select m from Member m order by m.age desc", Member.class)
+            /*List<Member> resultList = em.createQuery("select m from Member m order by m.age desc", Member.class)
                     .setFirstResult(0)
                     .setMaxResults(10)
                     .getResultList();
@@ -35,7 +35,34 @@ public class JpaMain {
             System.out.println("resultList.size = " + resultList.size());
             for (Member member1 : resultList) {
                 System.out.println("member1 = " + member1);
-            }
+            }*/
+            
+            /*String jpql = "select t from Team t";
+            List<Team> resultList = em.createQuery(jpql, Team.class)
+                    .setFirstResult(0)
+                    .setMaxResults(2)
+                    .getResultList();
+
+            for (Team team : resultList) {
+                System.out.println("team = " + team);
+                for (Member teamMember : team.getMembers()) {
+                    System.out.println("teamMember = " + teamMember);
+                }
+            }*/
+
+            /*List<Member> resultList = em.createNamedQuery("Member.findByUsername", Member.class)
+                    .setParameter("username", "member1")
+                    .getResultList();
+
+            for (Member member1 : resultList) {
+                System.out.println("member1 = " + member1);
+            }*/
+
+            String query = "update Member m set m.age = 20";
+            int resultCnt = em.createQuery(query)
+                            .executeUpdate();
+
+            System.out.println("resultCnt = " + resultCnt);
 
             tx.commit();
         } catch(Exception e) {
